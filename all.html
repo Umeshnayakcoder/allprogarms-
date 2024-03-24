@@ -1,0 +1,534 @@
+1.
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="todoctrl">
+  <form ng-submit="todoAdd()">
+    <input type="text" ng-model="todoFirst" size="50" placeholder="First Name">
+    <input type="text" ng-model="todoLast" size="50" placeholder="Last Name">
+    <button type="submit">Submit</button>
+  </form>
+  <center><p>{{fullName}}</p></center>
+  
+  <script>
+    var app = angular.module("myapp", []);
+    app.controller("todoctrl", function($scope) {
+      $scope.fullName = ""; // Initialize the fullName variable
+      $scope.todoAdd = function() {
+        $scope.fullName = $scope.todoFirst + " " + $scope.todoLast;
+      };
+    });
+  </script>
+</body>
+</html>
+
+2.
+
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body ng-app="myApp" ng-controller="todoCtrl">
+
+  <h2>My Todo list</h2>
+
+  <form ng-submit="todoAdd()">
+     <input type="text" ng-model="todoInput" size="50" placeholder="Add New">
+     <input type="submit" value="Add New">
+  </form>
+
+ <br>
+
+<div ng-repeat="x in todoList">
+  <input type="checkbox" ng-model="x.done"><span ng-bind="x.todoText"></span>
+</div>
+
+<p><button ng-click="remove()">Remove marked</button></p>
+
+<script>
+  var app=angular.module('myApp',[]);
+  app.controller('todoCtrl',function($scope){
+   $scope.todoList=[{todoText:'Clean House',done:false}];
+
+   $scope.todoAdd=function(){
+    $scope.todoList.push({todoText:$scope.todoInput,done:false});
+    $scope.todoInput="";
+  };
+
+ $scope.remove=function(){
+  var oldList=$scope.todoList;
+  $scope.todoList=[];
+  angular.forEach(oldList,function(x){
+   if(!x.done)$scope.todoList.push(x);
+  });
+  };
+ });
+</script>
+
+</body>
+</html>
+
+ 3.
+
+<!Doctype html>
+  <html>
+<html ng-app="myApp">
+<head> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>	  
+</head>
+<body ng-controller="myCtrl">
+	Enter First Number : <input type="text" ng-model="number1"> <br><br>
+	Enter Second Number : <input type="text" ng-model="number2"> <br><br>
+	<h4>Select Operator : <select ng-model="op" ng-options="item for item in operations"> </select></h4>
+	<input type="button" ng-click="Add()" value="Result">
+	<p>Result is : {{result}} </p> <br><br>
+</body>
+<script>
+	var app = angular.module('myApp',[]);
+	app.controller('myCtrl',function($scope) {
+		$scope.operations = ['+','-','*','/','%'];
+		$scope.Add = function() {
+		  var n1 = $scope.number1;
+		  var n2 = $scope.number2;
+		  switch($scope.op) {
+		 	case '+' : $scope.result = parseInt(n1) + parseInt(n2); break;
+			case '-' : $scope.result = parseInt(n1) - parseInt(n2); break;
+			case '*' : $scope.result = parseInt(n1) * parseInt(n2); break;
+			case '/' : $scope.result = parseInt(n1) / parseInt(n2); break;
+			case '%' : $scope.result = parseInt(n1) % parseInt(n2); break;
+			default : $scope.msg = "Invalid Selection"; break;
+		 }
+		};
+	});
+</script>
+</html>
+
+4.
+
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+    Enter the Number<input type="text" ng-model="number"></br>
+    <input type="button" value="calculate" ng-click="cal()"></br>
+    <h1>{{res}}</h1><br>
+    <h1>{{Square}}</h1>
+
+    <script>
+        var app = angular.module("myapp", []);
+        app.controller("myCtrl", function ($scope) {
+            $scope.cal = function () {
+                var num = $scope.number;
+                var i = 1;
+                var fact = 1;
+                for (i = num; i >= 1; i--) {
+                    fact = fact * i;
+                }
+                $scope.res = "Factorial: " + fact;
+                $scope.Square = "Square: " + num * num;
+            };
+        });
+    </script>
+</body>
+
+</html>
+
+5.
+
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    
+
+<script>
+    var app = angular.module("myapp", []);
+
+    app.controller("myctrl", function ($scope) {
+        $scope.names = ["Vedha", "Monica","Swati","Yamini","Shipa"];
+        $scope.cgpa = ["9","8","7","6","5"];
+        $scope.res = $scope.names.length
+        
+        }
+    )
+</script>
+</head>
+<body>
+    <div ng-controller="myctrl">
+       <ul>
+            <li ng-repeat="x in names">{{x}}
+            </li>
+            <li ng-repeat="y in cgpa">{{y}}
+            </li>
+            <p>{{res}}</p>
+</li>
+        
+        
+</ul>
+    </div>
+</body>
+</html>
+
+6.
+
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myapp" ng-controller="myctrl">
+
+
+<input type="text" ng-model="newTodo"   placeholder="add new task">
+<button ng-click="addTodo()" >Add</button>
+<p>Total tasks: {{ todos.length }}</p>
+<br>
+<ul>
+<li ng-repeat="todo in todos">
+<input type="checkbox" ng-model="todo.done">{{todo.title}}
+<button ng-click="removeTodo($index)">Remove</button>
+</li>
+</ul>
+<br>
+<script>
+var app=angular.module("myapp",[]);
+app.controller("myctrl",function($scope){
+ $scope.todos=[
+{title:'Task1',done:false },
+ {title:'Task2',done:false },
+ {title:'Task3',done:false }
+];
+
+$scope.newTodo="";
+
+$scope.addTodo=function(){
+ $scope.todos.push({title:$scope.newTodo,done:false});
+$scope.newTodo="";
+};
+
+$scope.removeTodo=function(index){
+ $scope.todos.splice(index,1);
+};
+});
+</script>
+</body>
+</html>
+
+7.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AngularJS Simple CRUD Application</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 5px;
+        }
+        th {
+            text-align: left;
+        }
+    </style>
+</head>
+<body ng-app="userApp" ng-controller="UserController">
+
+<h2>Users Management</h2>
+
+<!-- Form for adding a new user -->
+<form ng-submit="addUser()">
+    <input type="text" ng-model="newUser.name" placeholder="Name" required>
+    <input type="email" ng-model="newUser.email" placeholder="Email" required>
+    <button type="submit">Add User</button>
+</form>
+
+<!-- Table to display users -->
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    <tr ng-repeat="user in users">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+            <button ng-click="editUser($index)">Edit</button>
+            <button ng-click="deleteUser($index)">Delete</button>
+        </td>
+    </tr>
+</table>
+
+<!-- Form for editing a user -->
+<div ng-if="editingUser">
+    <h3>Edit User</h3>
+    <form ng-submit="updateUser()">
+        <input type="text" ng-model="editingUser.name" placeholder="Name" required>
+        <input type="email" ng-model="editingUser.email" placeholder="Email" required>
+        <button type="submit">Update User</button>
+        <button type="button" ng-click="cancelEditing()">Cancel</button>
+    </form>
+</div>
+
+<script>
+    var app = angular.module('userApp', []);
+    app.controller('UserController', function($scope) {
+        $scope.users = [
+            {id: 1, name: 'John Doe', email: 'john@example.com'},
+            {id: 2, name: 'Jane Doe', email: 'jane@example.com'}
+        ];
+
+        $scope.addUser = function() {
+            $scope.users.push({
+                id: $scope.users.length + 1,
+                name: $scope.newUser.name,
+                email: $scope.newUser.email
+            });
+            $scope.newUser.name = '';
+            $scope.newUser.email = '';
+        };
+
+        $scope.editUser = function(index) {
+            $scope.editingUser = angular.copy($scope.users[index]);
+            $scope.editingIndex = index;
+        };
+
+        $scope.updateUser = function() {
+            $scope.users[$scope.editingIndex] = angular.copy($scope.editingUser);
+            $scope.editingUser = {};
+        };
+
+        $scope.deleteUser = function(index) {
+            $scope.users.splice(index, 1);
+        };
+
+        $scope.cancelEditing = function() {
+            $scope.editingUser = {};
+        };
+    });
+</script>
+</body>
+</html>
+
+8.
+
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+ <h2>Login Form</h2>
+ <form name="myForm">
+    <label>Username:</label><br>
+    <input type="text" name="user" ng-model="user.name" required><br>
+    <p ng-show="myForm.user.$dirty && myForm.user.$invalid">Please enter a valid username.</p>
+
+    <label>Password:</label><br>
+    <input type="password" name="password" ng-model="user.password" required><br>
+    <p ng-show="myForm.password.$dirty && myForm.password.$invalid">Please enter a valid password.</p>
+
+    <button type="submit" ng-click="submitForm(myForm)">Submit</button>
+ </form>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+ $scope.user = {name: '', password: ''};
+
+ $scope.submitForm = function(form) {
+    if (form.$valid) {
+      alert('Login successful');
+    } else {
+      alert('Please correct the errors in the form');
+    }
+ };
+});
+</script>
+
+</body>
+</html>
+
+9.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    </head>
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+
+        <!--DYNAMICALLY POPULATE SELECT ELEMENT USING JSON HEADERS-->
+        Search By 
+        <select ng-model="columns" ng-options="e for e in headers">
+            <option value=""></option>
+        </select>
+    
+        <!--BIND THE SEARCH BOX TO THE SELECT ELEMENT-->
+        Search <input type="text" ng-model="search[columns]" 
+            placeholder="Enter some text to search" />
+    
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Employee Name</th>
+                <th>Sal</th>
+                <th>Age</th>
+            </tr>
+
+            <tr ng-repeat="emps in employees | filter : search">
+                <td>{{emps.id}}</td>
+                <td>{{emps.name}}</td>
+                <td>{{emps.Sal}}</td>    
+                <td>{{emps.age}}</td>
+            </tr>
+        </table>
+    </div>    
+</body>
+
+<script>
+    angular.module("myApp", [])
+        .controller('myController', ['$scope', function ($scope) {
+
+            $scope.employees =
+            [
+                { 'id': '001', 'name': 'Alpha', 'Sal': '10000', 'age': 37 },
+                { 'id': '002', 'name': 'Bravo', 'Sal': '200000', 'age': 27 },
+                { 'id': '003', 'name': 'Charlie', 'Sal': '13000', 'age': 29 },
+                { 'id': '004', 'name': 'Delta', 'Sal': '20000', 'age': 19 },
+                { 'id': '005', 'name': 'Echo', 'Sal': '30000', 'age': 32 }
+            ]
+
+            // GET JSON ARRAY HEADERS.
+            $scope.headers = Object.keys($scope.employees[0]);
+        } ]);
+</script>
+</html>
+
+10.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Collection App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="itemApp">
+
+    <div ng-controller="ItemController as ctrl">
+        <input type="text" ng-model="ctrl.newItem" placeholder="Enter new item" />
+        <button ng-click="ctrl.addItem()">Add Item</button>
+
+        <table>
+            <tr ng-repeat="item in ctrl.items">
+               <td> {{ item }} </td>
+              <td><button ng-click="ctrl.removeItem($index)">Remove</button></td>
+            </tr>
+        </table>
+
+        <p>Total Items: {{ ctrl.items.length }}</p>
+    </div>
+<script>
+angular.module('itemApp', [])
+.controller('ItemController', function() {
+    this.items = ['Item 1', 'Item 2', 'Item 3']; // default items
+    this.newItem = '';
+
+    this.addItem = function() {
+        if (this.newItem !== '') {
+            this.items.push(this.newItem);
+            this.newItem = '';
+        }
+    };
+
+    this.removeItem = function(index) {
+        this.items.splice(index, 1);
+    };
+});
+</script>
+    </body>
+</html>
+
+11.
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Details to Uppercase</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="studentApp" ng-controller="studentController">
+
+    <h2>Student Details</h2>
+
+    <ul>
+        <li ng-repeat="student in students">
+            {{ student | uppercaseStudent }}
+        </li>
+    </ul>
+<script>
+var app = angular.module('studentApp', []);
+
+app.controller('studentController', function($scope) {
+    $scope.students = [
+        'John Doe, Age: 20, Major: Computer Science',
+        'Jane Smith, Age: 22, Major: Mathematics',
+        'Emily Johnson, Age: 21, Major: Physics'
+        // Add more students as needed
+    ];
+});
+
+app.filter('uppercaseStudent', function() {
+    return function(input) {
+        return input ? input.toUpperCase() : '';
+    };
+});
+</script>
+</body>
+</html>
+
+ 12.
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date Display</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="dateApp" ng-controller="dateController">
+
+    <h2>Current Date</h2>
+    
+    <p>Default format: {{ currentDate | date }}</p>
+    <p>Full date: {{ currentDate | date: 'fullDate' }}</p>
+    <p>Short date: {{ currentDate | date: 'shortDate' }}</p>
+    <p>Medium date: {{ currentDate | date: 'mediumDate' }}</p>
+    <p>Long date: {{ currentDate | date: 'longDate' }}</p>
+    <p>ISO string: {{ currentDate | date: 'yyyy-MM-ddTHH:mm:ss.sssZ' }}</p>
+<script>
+var app = angular.module('dateApp', []);
+app.controller('dateController', function($scope) {
+    $scope.currentDate = new Date();
+});
+
+</script>
+</body>
+</html>
